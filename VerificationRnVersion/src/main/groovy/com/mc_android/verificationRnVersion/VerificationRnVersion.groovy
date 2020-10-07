@@ -12,6 +12,8 @@ class VerificationRnVersion implements Plugin<Project> {
 
         project.extensions.create("rnPackageJson", PackageJson)
         project.task('verificationRnVersion'){
+            println new File(System.getProperty("user.dir")).name
+
             println "开始验证rn版本和module里面的版本是否一致"
             def packageJsonFile = new File(project.rnPackageJson.localRnPath)
             def packageJson = new JsonSlurper().parseText(packageJsonFile.text)
@@ -42,6 +44,6 @@ class VerificationRnVersion implements Plugin<Project> {
 
 
 class PackageJson {
-    String localRnPath = '../module/rn/package.json'
-    String remoteRnPath = '../module/rn/node_modules/vv-rn/package.json'
+    String localRnPath = './module/rn/package.json'
+    String remoteRnPath = './module/rn/node_modules/vv-rn/package.json'
 }
