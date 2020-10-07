@@ -13,12 +13,12 @@ class VerificationRnVersion implements Plugin<Project> {
         project.extensions.create("rnPackageJson", PackageJson)
         project.task('verificationRnVersion'){
             println "开始验证rn版本和module里面的版本是否一致"
-            def packageJsonFile = file(project.rnPackageJson.localRnPath)
+            def packageJsonFile = new File(project.rnPackageJson.localRnPath)
             def packageJson = new JsonSlurper().parseText(packageJsonFile.text)
             def packageVvRn=packageJson.dependencies['vv-rn']
             println packageVvRn
 
-            def vvRnPackageJsonFile = file(project.rnPackageJson.remoteRnPath)
+            def vvRnPackageJsonFile = new File(project.rnPackageJson.remoteRnPath)
             def vvRnPackageJson  = new JsonSlurper().parseText(vvRnPackageJsonFile.text)
             def vvRnPackageVvRn=vvRnPackageJson['version']
             println vvRnPackageVvRn
@@ -42,6 +42,6 @@ class VerificationRnVersion implements Plugin<Project> {
 
 
 class PackageJson {
-    String localRnPath = ''
-    String remoteRnPath = ''
+    String localRnPath = '../module/rn/package.json'
+    String remoteRnPath = '../module/rn/node_modules/vv-rn/package.json'
 }
