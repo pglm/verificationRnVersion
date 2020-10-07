@@ -1,0 +1,3 @@
+include ':app'
+include ':VerificationRnVersion'
+rootProject.name = "Demo"
