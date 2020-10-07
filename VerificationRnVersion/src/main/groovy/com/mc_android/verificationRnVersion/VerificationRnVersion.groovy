@@ -12,8 +12,6 @@ class VerificationRnVersion implements Plugin<Project> {
 
         project.extensions.create("rnPackageJson", PackageJson)
         project.task('verificationRnVersion'){
-            println new File(System.getProperty("user.dir")).name
-
             println "开始验证rn版本和module里面的版本是否一致"
             def packageJsonFile = new File(project.rnPackageJson.localRnPath)
             def packageJson = new JsonSlurper().parseText(packageJsonFile.text)
@@ -35,8 +33,8 @@ class VerificationRnVersion implements Plugin<Project> {
 
         project.tasks.whenTaskAdded { Task theTask ->
             if (theTask.name.contains('assemble')) {
-                theTask.dependsOn(verificationRnVersion)
-                theTask.mustRunAfter(verificationRnVersion)
+                theTask.dependsOn("verificationRnVersion")
+                theTask.mustRunAfter("verificationRnVersion")
             }
         }
     }
