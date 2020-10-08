@@ -5,6 +5,7 @@ import org.gradle.api.Plugin
 import org.gradle.api.Project
 import org.gradle.api.Task
 
+
 class VerificationRnVersion implements Plugin<Project> {
 
     @Override
