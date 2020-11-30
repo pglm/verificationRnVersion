@@ -12,21 +12,18 @@ class VerificationRnVersion implements Plugin<Project> {
     void apply(Project project) {
 
         project.extensions.create("rnPackageJson", PackageJson)
-        project.task('verificationRnVersion'){
-            println "开始验证rn版本和module里面的版本是否一致"
+        project.task('verificationRnVersion') {
             def packageJsonFile = new File(project.rnPackageJson.localRnPath)
             def packageJson = new JsonSlurper().parseText(packageJsonFile.text)
-            def packageVvRn=packageJson.dependencies['vv-rn']
+            def packageVvRn = packageJson.dependencies['vv-rn']
             println packageVvRn
 
             def vvRnPackageJsonFile = new File(project.rnPackageJson.remoteRnPath)
-            def vvRnPackageJson  = new JsonSlurper().parseText(vvRnPackageJsonFile.text)
-            def vvRnPackageVvRn=vvRnPackageJson['version']
+            def vvRnPackageJson = new JsonSlurper().parseText(vvRnPackageJsonFile.text)
+            def vvRnPackageVvRn = vvRnPackageJson['version']
             println vvRnPackageVvRn
 
-            if(packageVvRn == vvRnPackageVvRn){
-                println "rn版本和module里面的版本是一致的："+packageVvRn
-            }else{
+            if (packageVvRn != vvRnPackageVvRn) {
                 throw RuntimeException("请去更新rn的node_modules包,然后再打包")
             }
         }
