@@ -12,6 +12,7 @@ class VerificationRnVersion implements Plugin<Project> {
     void apply(Project project) {
 
         project.extensions.create("rnPackageJson", PackageJson)
+        println("------------>>"+project.rnPackageJson.localRnPath)
         project.task('verificationRnVersion') {
             def packageJsonFile = new File(project.rnPackageJson.localRnPath)
             def packageJson = new JsonSlurper().parseText(packageJsonFile.text)
@@ -38,8 +39,3 @@ class VerificationRnVersion implements Plugin<Project> {
     }
 }
 
-
-class PackageJson {
-    String localRnPath = './module/rn/package.json'
-    String remoteRnPath = './module/rn/node_modules/vv-rn/package.json'
-}
