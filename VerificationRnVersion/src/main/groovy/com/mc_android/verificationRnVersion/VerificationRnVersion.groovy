@@ -10,7 +10,8 @@ class VerificationRnVersion implements Plugin<Project> {
 
     @Override
     void apply(Project project) {
-
+        println("------------>>0000")
+        println("------------>>1111"+project.rnPackageJson.localRnPath)
         project.extensions.create("rnPackageJson", PackageJson)
         println("------------>>"+project.rnPackageJson.localRnPath)
         project.task('verificationRnVersion') {
