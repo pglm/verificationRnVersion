@@ -5,6 +5,10 @@ import org.gradle.api.Plugin
 import org.gradle.api.Project
 import org.gradle.api.Task
 
+class PackageJson {
+    String localRnPath
+    String remoteRnPath
+}
 
 class VerificationRnVersion implements Plugin<Project> {
 
