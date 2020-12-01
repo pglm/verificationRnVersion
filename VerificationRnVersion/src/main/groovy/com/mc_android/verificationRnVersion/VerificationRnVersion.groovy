@@ -15,11 +15,11 @@ class VerificationRnVersion implements Plugin<Project> {
 
     @Override
     void apply(Project project) {
-        println("------------>>0000")
         def ext = project.extensions.create(EXTENSION_NAME, PackageJson.class)
         project.task('verificationRnVersion') {
-            doLast {
-                println("------------>>1111" + ext.localRnPath)
+            println("------------${ext.localRnPath}")
+            doFirst {
+                println("-------222-----${ext.localRnPath}")
                 def packageJsonFile = new File(ext.localRnPath)
                 def packageJson = new JsonSlurper().parseText(packageJsonFile.text)
                 def packageVvRn = packageJson.dependencies['vv-rn']
@@ -31,14 +31,14 @@ class VerificationRnVersion implements Plugin<Project> {
                 println vvRnPackageVvRn
 
                 if (packageVvRn != vvRnPackageVvRn) {
-                    throw RuntimeException("请去更新rn的node_modules包,然后再打包")
+                    throw RuntimeException("please update rn node_modules")
                 }
             }
         }
 
 
         project.tasks.whenTaskAdded { theTask ->
-            if (theTask.name.contains('assemble')) {
+            if (theTask.name.contains('assemble')||theTask.name.contains('bundle')) {
                 theTask.dependsOn('verificationRnVersion')
                 theTask.mustRunAfter('verificationRnVersion')
             }
