@@ -8,6 +8,22 @@ import org.gradle.api.Task
 class PackageJson {
     String localRnPath
     String remoteRnPath
+
+    String getLocalRnPath() {
+        return localRnPath
+    }
+
+    void setLocalRnPath(String localRnPath) {
+        this.localRnPath = localRnPath
+    }
+
+    String getRemoteRnPath() {
+        return remoteRnPath
+    }
+
+    void setRemoteRnPath(String remoteRnPath) {
+        this.remoteRnPath = remoteRnPath
+    }
 }
 
 class VerificationRnVersion implements Plugin<Project> {
@@ -15,7 +31,7 @@ class VerificationRnVersion implements Plugin<Project> {
     @Override
     void apply(Project project) {
         println("------------>>0000")
-        def ext = project.extensions.create(EXTENSION_NAME, PackageJson)
+        def ext = project.extensions.create(EXTENSION_NAME, PackageJson.class)
         println("------------>>" + ext)
         println("------------>>" + ext.localRnPath)
         project.task('verificationRnVersion') {
