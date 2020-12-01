@@ -11,13 +11,16 @@ class PackageJson {
 }
 
 class VerificationRnVersion implements Plugin<Project> {
-
+    static final String EXTENSION_NAME = 'rnPackageJson'
     @Override
     void apply(Project project) {
         println("------------>>0000")
-        def ext = project.extensions.create('rnPackageJson', PackageJson)
+        def ext = project.extensions.create(EXTENSION_NAME, PackageJson)
+        println("------------>>" + ext)
         println("------------>>" + ext.localRnPath)
         project.task('verificationRnVersion') {
+            println("------------>>222222" + ext.localRnPath)
+
             def packageJsonFile = new File(ext.localRnPath)
             def packageJson = new JsonSlurper().parseText(packageJsonFile.text)
             def packageVvRn = packageJson.dependencies['vv-rn']
@@ -36,8 +39,8 @@ class VerificationRnVersion implements Plugin<Project> {
 
         project.tasks.whenTaskAdded { Task theTask ->
             if (theTask.name.contains('assemble')) {
-                theTask.dependsOn("verificationRnVersion")
-                theTask.mustRunAfter("verificationRnVersion")
+                theTask.dependsOn('verificationRnVersion')
+                theTask.mustRunAfter('verificationRnVersion')
             }
         }
     }
