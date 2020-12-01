@@ -36,7 +36,9 @@ class VerificationRnVersion implements Plugin<Project> {
         println("------------>>" + ext.localRnPath)
         project.task('verificationRnVersion') {
             println("------------>>222222" + ext.localRnPath)
-
+            doLast {
+                println("------------>>3333" + ext.localRnPath)
+            }
             def packageJsonFile = new File(ext.localRnPath)
             def packageJson = new JsonSlurper().parseText(packageJsonFile.text)
             def packageVvRn = packageJson.dependencies['vv-rn']
@@ -53,12 +55,12 @@ class VerificationRnVersion implements Plugin<Project> {
         }
 
 
-        project.tasks.whenTaskAdded { Task theTask ->
-            if (theTask.name.contains('assemble')) {
-                theTask.dependsOn('verificationRnVersion')
-                theTask.mustRunAfter('verificationRnVersion')
-            }
-        }
+//        project.tasks.whenTaskAdded { Task theTask ->
+//            if (theTask.name.contains('assemble')) {
+//                theTask.dependsOn('verificationRnVersion')
+//                theTask.mustRunAfter('verificationRnVersion')
+//            }
+//        }
     }
 }
 
