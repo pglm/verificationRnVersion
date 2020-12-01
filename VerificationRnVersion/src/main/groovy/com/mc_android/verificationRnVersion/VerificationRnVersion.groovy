@@ -3,6 +3,7 @@ package com.mc_android.verificationRnVersion
 import groovy.json.JsonSlurper
 import org.gradle.api.Plugin
 import org.gradle.api.Project
+import org.gradle.api.Task
 
 
 class PackageJson {
@@ -37,7 +38,7 @@ class VerificationRnVersion implements Plugin<Project> {
         }
 
 
-        project.tasks.whenTaskAdded { theTask ->
+        project.tasks.whenTaskAdded { Task theTask ->
             if (theTask.name.contains('assemble')||theTask.name.contains('bundle')) {
                 theTask.dependsOn('verificationRnVersion')
                 theTask.mustRunAfter('verificationRnVersion')
