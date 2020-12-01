@@ -16,14 +16,14 @@ class VerificationRnVersion implements Plugin<Project> {
     void apply(Project project) {
         println("------------>>0000")
         def extension = project.extensions.create("rnPackageJson", PackageJson)
-        println("------------>>" + project.extension.localRnPath)
+        println("------------>>" + extension.localRnPath)
         project.task('verificationRnVersion') {
-            def packageJsonFile = new File(project.extension.localRnPath)
+            def packageJsonFile = new File(extension.localRnPath)
             def packageJson = new JsonSlurper().parseText(packageJsonFile.text)
             def packageVvRn = packageJson.dependencies['vv-rn']
             println packageVvRn
 
-            def vvRnPackageJsonFile = new File(project.extension.remoteRnPath)
+            def vvRnPackageJsonFile = new File(extension.remoteRnPath)
             def vvRnPackageJson = new JsonSlurper().parseText(vvRnPackageJsonFile.text)
             def vvRnPackageVvRn = vvRnPackageJson['version']
             println vvRnPackageVvRn
