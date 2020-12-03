@@ -17,10 +17,13 @@ class VerificationRnVersion implements Plugin<Project> {
     @Override
     void apply(Project project) {
         def ext = project.extensions.create(EXTENSION_NAME, PackageJson.class)
+
+
+
         project.task('verificationRnVersion') {
-            println("------------${ext.localRnPath}")
+
             doFirst {
-                println("-------222-----${ext.localRnPath}")
+                println("------------${ext.localRnPath}")
                 def packageJsonFile = new File(ext.localRnPath)
                 def packageJson = new JsonSlurper().parseText(packageJsonFile.text)
                 def packageVvRn = packageJson.dependencies['vv-rn']
@@ -39,10 +42,12 @@ class VerificationRnVersion implements Plugin<Project> {
 
 
         project.tasks.whenTaskAdded { Task theTask ->
-            if (theTask.name.contains('app:assembleProdHttpsGmsRelease') || theTask.name.contains('app:bundleProdHttpsGmsRelease')
-                    || theTask.name.contains('app:assembleProdHttpsHmsRelease') || theTask.name.contains('app:bundleProdHttpsHmsRelease')) {
+            if (theTask.name.contains('app:assembleRelease') || theTask.name.contains('app:bundleRelease')
+                    || theTask.name.contains('app:assembleRelease') || theTask.name.contains('app:bundleRelease')) {
                 theTask.dependsOn('verificationRnVersion')
                 theTask.mustRunAfter('verificationRnVersion')
+
+
             }
         }
     }

@@ -1,9 +1,11 @@
 apply plugin: 'groovy'
 apply plugin: 'com.github.dcendents.android-maven'
 group='com.github.pglm'
+//apply plugin: 'maven'
 
-
-
+//repositories {
+//    mavenCentral()
+//}
 
 dependencies {
     //gradle sdk
@@ -11,3 +13,18 @@ dependencies {
     //groovy sdk
     implementation localGroovy()
 }
+
+//group和version在后面使用自定义插件的时候会用到
+//group='com.mc_android.verificationRnVersion'
+//version='1.0.0'
+//
+//uploadArchives {
+//    repositories {
+//        mavenDeployer {
+//            //提交到远程服务器：
+//             repository(url: "https://maven.gitvv.com/repository/android/") {
+//                authentication(userName: "ziteng.peng", password: "dah1Veidais/au7ai[b#uak")
+//             }
+//        }
+//    }
+//}
