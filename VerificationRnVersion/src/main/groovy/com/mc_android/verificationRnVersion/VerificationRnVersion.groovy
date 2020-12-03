@@ -21,7 +21,8 @@ class VerificationRnVersion implements Plugin<Project> {
 
 
         project.task('verificationRnVersion') {
-
+            println("------------0000")
+            
             doFirst {
                 println("------------${ext.localRnPath}")
                 def packageJsonFile = new File(ext.localRnPath)
