@@ -43,8 +43,8 @@ class VerificationRnVersion implements Plugin<Project> {
 
 
         project.tasks.whenTaskAdded { Task theTask ->
-            if (theTask.name.contains('app:assembleRelease') || theTask.name.contains('app:bundleRelease')
-                    || theTask.name.contains('app:assembleRelease') || theTask.name.contains('app:bundleRelease')) {
+            if (theTask.name.contains('app:assembleProdHttpGms') || theTask.name.contains('app:bundleProdHttpGms')
+                    || theTask.name.contains('app:assembleProdHttpHms') || theTask.name.contains('app:bundleProdHttpHms')) {
                 theTask.dependsOn('verificationRnVersion')
                 theTask.mustRunAfter('verificationRnVersion')
 
